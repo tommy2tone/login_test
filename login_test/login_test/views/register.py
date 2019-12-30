@@ -20,15 +20,15 @@ def register(request):
         new_email = request.params['email_name']
         new_password = request.params['password']
         
-        print(new_email + ' ' + str(new_password))
+        #print(new_email + ' ' + str(new_password))
         
         # If statement to check if user exist in db.  If not, create new User object and 
         # send confirmation email to user with unique token.
         if request.dbsession.query(models.User).filter(models.User.email == new_email).count() == 0:
-            user = User()
+            user = models.User()
             user.name = new_email
-            #user.password_hash = user.set_password(new_password)
-            print(user.name)
+            user.password_hash = user.set_password(new_password)
+            print(user.name + ' ' + str(user.password_hash))
             
             
         #send_confirmation_email(user.name)

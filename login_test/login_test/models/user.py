@@ -13,8 +13,7 @@ class User(Base):
     """ The SQLAlchemy declarative model class for a User object. """
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    email = Column(Text, nullable=False, unique=True)
-    role = Column(Text, nullable=False)
+    email = Column(Text, nullable=True, unique=True)
     password_hash = Column(Text)
     email_confirmation_sent_on = Column(Text, nullable=True, default=0)
     email_confirmed = Column(Integer, nullable=True, default=0)

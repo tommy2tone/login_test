@@ -10,7 +10,8 @@ from .. import models
 
 
 def setup_models(dbsession):
-    user = models.User(email='user2@mail.com', role='user')
+    user = models.User()
+    user.email = 'user@mail.com'
     user.password_hash = bcrypt.hash('user')
     dbsession.add(user)
 
