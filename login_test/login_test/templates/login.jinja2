@@ -9,16 +9,18 @@
 </strong><br>
 </p>
 <form action="{{ url }}" method="post">
-<input type="hidden" name="next" value="{{ next_url }}">
 
     <label for="login">Username:</label>
-    <input type="text" name="login" value="{{ login }}"></br>
+    <input placeholder='Enter Email' type="email" name="email" value="{{ login }}"></br>
 
     <label for="password">Password:</label>
-    <input type="password" name="password"></br>
+    <input placeholder='Enter Password' type="password" name="password"></br>
 
     <button type="submit" name="form.submitted" value="Log In" class="btn btn-default">Log In</button>
     <button type="submit" formaction='{{ request.route_url('register') }}'>Create Account</button>
-
+    
 </form>
+<h6><a href='{{request.route_url('reset')}}'>Forgot Password?</a></h6>
+
+{{message}}
 {% endblock content %}

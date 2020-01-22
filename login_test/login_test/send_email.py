@@ -1,32 +1,28 @@
-from pyramid.session import JSONSerializer
-from pyramid.session import SignedCookieSessionFactory
 from pyramid_mailer.mailer import Mailer
 from pyramid_mailer.message import Message
-from pyramid.url import route_url
+from email_config import host, port, username, password
 
+def send_confirmation_email(email, link):
+        email = email
+        link = link
 
-def send_confirmation_email(email):
-    mailer = Mailer(host='smtp.gmail.com',
-                port=465,
-                username='thomas.hildebrand11@gmail.com',
-                password='@Testing1234',
-                ssl=True)
-
-    confirm_serializer = JSONSerializer()
-
-    token = confirm_serializer.dumps(email)
-    #link = route_url('register', token=token, _external=True)
-    #print(token)
+        mailer = Mailer(host=host,
+                        port=port,
+                        username=username,
+                        password=password,
+                        ssl=True)
     
-    subject = "Welcome to Handy Money.  Please verify your email."
-    body = 'Please verify your email by clicking this link:  '
     
-    message = Message(subject=subject,
-            sender='thomas.hildebrand11@gmail.com',
-            recipients=[email],
-            body=body
-                    )
+        subject = "Welcome.  Please verify your email."
+        body = f'Please verify your email by clicking this link: {link} ' 
+        #Create html.jinja2 template for email body
+        
+        message = Message(subject=subject,
+                sender=username,
+                recipients=[email],
+                body=body
+                        )
 
-    #mailer.send_immediately(message)
+        mailer.send_immediately(message)
 
    

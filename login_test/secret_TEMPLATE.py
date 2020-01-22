@@ -1,0 +1,1 @@
+secret = '' #   Type secret between quotes

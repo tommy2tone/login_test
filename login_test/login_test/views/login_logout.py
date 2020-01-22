@@ -1,4 +1,6 @@
 from pyramid.httpexceptions import HTTPFound
+from pyramid.response import Response
+from pyramid.renderers import render_to_response
 from pyramid.security import (
     remember,
     forget,
@@ -8,30 +10,26 @@ from pyramid.view import (
     view_config,
 )
 
-from ..models import User
+from .. import models
 
 @view_config(route_name='home', renderer='../templates/login.jinja2')
 def login(request):
-    next_url = request.params.get('next', request.referrer)
-    if not next_url:
-        next_url = request.route_url('home')
-    message = ''
-    login = ''
+    
     if 'form.submitted' in request.params:
-        login = request.params['login']
+        email = request.params['email']
         password = request.params['password']
-        user = request.dbsession.query(User).filter_by(name=login).first()
-        if user is not None and user.check_password(password):
-            headers = remember(request, user.id)
-            return HTTPFound(location=next_url, headers=headers)
-        message = 'Failed login'
+        user = request.dbsession.query(models.User).filter(models.User.email==email).first()
+        if user is None:
+            return {'message': 'Email cannot be found.  Please create an account.'}
+        if not user.check_password(password):
+            return {'message': 'Incorrect password.  Please try again.'}
+        if user.email_confirmed != 1:
+            return {'message': 'Your email has not been confirmed'}
+        else:
+            return HTTPFound(request.route_url('user_home'))
 
-    return dict(
-        message=message,
-        url=request.route_url('login'),
-        next_url=next_url,
-        login=login,
-        )
+    
+    return {}
 
 @view_config(route_name='logout')
 def logout(request):

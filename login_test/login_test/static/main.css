@@ -29,14 +29,29 @@ html, body {
 }
 
 .container h2 {
-  font-size: 15px;
-  margin-top: 20px;
+  font-size: 20px;
+  margin-top: 15px;
   color: rgb(0, 0, 0)
 }
+
 
 .container form{
   margin: 20px;
 
+}
+
+.container ul{
+  list-style-position: outside;
+  font-size: 15px;
+  display: inline-block;
+  text-align: left;
+  
+}
+
+.container li{
+  font-size: 12px;
+ 
+  
 }
 
 .container label{
