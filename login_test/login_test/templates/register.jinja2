@@ -1,0 +1,47 @@
+{% extends "layout.jinja2" %}
+
+{% block subtitle %}Register{% endblock %}
+
+{% block content %}
+<p>
+  <strong>Create Account</strong>
+</p>
+  <form action="{{request.route_url('register')}}" method='POST'>
+    <label for='email'>Email:</label>
+    <input  placeholder='Enter Email'
+            type='email'
+            name='email_name'
+            required
+    />
+    </br>
+
+    <label for='password'>Password:</label>
+    <input  placeholder='Enter Password'
+            type='password'
+            name='password'
+            required
+    />
+    </br>
+  
+    <label for='reenter_password'>Re-Enter Password:</label>
+    <input  placeholder='Re-enter Password'
+                type='password'
+                name='reenter_password'
+                required
+    />
+    </br>
+
+    <button type='submit' name='form.submitted'>Submit</button>
+  
+  </form>
+  <ul>Password Requirements:
+    <li>Between 8 and 32 characters</li>
+    <li>At least 1 uppercase letter</li>
+    <li>At least 1 lowercase letter</li>
+    <li>At least 1 number</li>
+    <li>At least 1 special character !@#$%^&*</li>
+    <li>No spaces</li>
+  </ul>
+  <h2><strong>{{message}}</strong></h2>
+  
+{% endblock content %}

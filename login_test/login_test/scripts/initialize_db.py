@@ -1,6 +1,8 @@
 import argparse
 import sys
 
+from passlib.hash import bcrypt
+
 from pyramid.paster import bootstrap, setup_logging
 from sqlalchemy.exc import OperationalError
 
@@ -8,12 +10,12 @@ from .. import models
 
 
 def setup_models(dbsession):
-    """
-    Add or update models / fixtures in the database.
+    user = models.User()
+    user.email = 'user@mail.com'
+    user.password_hash = bcrypt.hash('user')
+    dbsession.add(user)
 
-    """
-    model = models.mymodel.MyModel(name='one', value=1)
-    dbsession.add(model)
+    
 
 
 def parse_args(argv):
