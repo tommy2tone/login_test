@@ -23,6 +23,7 @@ requires = [
     'transaction',
     'zope.sqlalchemy',
     'passlib',
+    'itsdangerous',
     
 ]
 
