@@ -34,6 +34,13 @@ html, body {
   color: rgb(0, 0, 0)
 }
 
+.container h3 {
+  font-family: Arieal, sans-sarig;
+  font-size: 15px;
+  margin-top: 10px;
+  
+}
+
 
 .container form{
   margin: 20px;

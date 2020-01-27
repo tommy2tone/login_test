@@ -20,7 +20,7 @@
     <button type="submit" formaction='{{ request.route_url('register') }}'>Create Account</button>
     
 </form>
-<h6><a href='{{request.route_url('reset')}}'>Forgot Password?</a></h6>
+<h6><a href='{{request.route_url('reset_email')}}'>Forgot Password?</a></h6>
 
 {{message}}
 {% endblock content %}

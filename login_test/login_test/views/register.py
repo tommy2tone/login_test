@@ -16,6 +16,7 @@ confirm_serializer = URLSafeTimedSerializer(secret.secret)
 @view_config(route_name='register', renderer='../templates/register.jinja2')
 def register(request): 
     if 'form.submitted' in request.params:
+        #   Retrieve form data
         new_email = request.params['email_name']
         new_password = request.params['password']
         new_reenter_password = request.params['reenter_password']
@@ -54,12 +55,12 @@ def register(request):
     return {}
     
 
-@view_config(route_name='confirm_email', renderer='../templates/confirm_email.jinja2') #Need template for confirm_email page
+@view_config(route_name='confirm_email', renderer='../templates/confirm_email.jinja2') 
 def confirm_email(request):
     token = request.matchdict['token']
     try:
-        email = confirm_serializer.loads(token, salt='email-confirmation', max_age=432000)
-        #Add if statement to change 'email_confirmed' column to True
+        email = confirm_serializer.loads(token, salt='email-confirmation', max_age=86400)
+        #   Add if statement to change 'email_confirmed' column to 1
         if email:
             user = request.dbsession.query(models.User).filter(models.User.email == email).first()
             user.email_confirmed = 1
@@ -73,6 +74,3 @@ def check_email(request):
     return{}
 
 
-@view_config(route_name='reset', renderer='../templates/reset.jinja2')
-def reset(request):
-    return {}
