@@ -1,0 +1,22 @@
+{% extends "layout.jinja2" %}
+
+{% block subtitle %}Reset{% endblock %}
+
+{% block content %}
+<form method='POST'>
+    <label for='email'>Email:</label>
+    <input  placeholder='Enter Email'
+            type='email'
+            name='email_name'
+            required
+    />
+    </br>
+    <button type='submit' name='form.submitted'>Submit</button>
+  
+  </form>
+  {{message}} 
+  </br>
+  <h3><a href='{{link}}'>{{label}}</a></h3>
+  
+  
+{% endblock content %}
